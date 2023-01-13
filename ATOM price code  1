@@ -1,0 +1,22 @@
+function fetchAtomCurrency() {
+    // Fetch current value of ATOM from an API
+    return fetch("https://api.coingecko.com/api/v3/simple/price?ids=cosmos&vs_currencies=usd")
+        .then(response => response.json())
+        .then(data => data.cosmos.usd);
+}
+
+
+In this example, we use the Fetch API to make a GET request to the CoinGecko API, which returns the current value of ATOM in USD. The fetch() method returns a promise that resolves with the API response, which we convert to a JSON object using the json() method. The then() method is used to extract the value of ATOM in USD from the JSON object and return it.
+
+Note that this function is not handling the error if the fetch fail, you can add .catch() to handle the error or use async/await to handle it in a more elegant way
+
+
+async function fetchAtomCurrency() {
+    try {
+        const response = await fetch("https://api.coingecko.com/api/v3/simple/price?ids=cosmos&vs_currencies=usd");
+        const data = await response.json();
+        return data.cosmos.usd;
+    } catch (error) {
+        console.error(error);
+    }
+}
